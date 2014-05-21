@@ -66,7 +66,7 @@ do
 	echo "-NODE="$NODE
 	if [[ "$NODE" == "$GOAL_NODE" ]]
 	then
-		echo "FINDED"
+		echo "FOUND"
 		PRINT_GRAPH
 		print_path # > pass
 		exit
@@ -89,7 +89,7 @@ do
 	NEXT=$(($NEXT + 1))
 done
 
-echo "NOT FINDED"
+echo "NOT FOUND"
 PRINT_GRAPH "SELECT * FROM Graph order by a_id;"
 
 #echo "Table Graph dropped"
