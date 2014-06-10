@@ -92,7 +92,7 @@ int main (int argc, char const *argv[]) {
 		}
 	}
 
-	strcpy(startNode,argv[1]);			// начинаем обход с вершины startNode
+	BFS_TREE(startNode,argv[1])			// начинаем обход с вершины startNode
 	
 	SET_ALL_NO_PARENT(query)
 	// PRINTF("Query: %s\n",query)

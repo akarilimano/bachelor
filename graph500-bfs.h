@@ -15,6 +15,8 @@
 // #define SEL_NEXT "select distinct %s,%s from %s where %s=%ld"
 // #define Q "select %s from %s where %s=%s"
 
+#define BFS_TREE(ROOT,VAL1) strcpy(ROOT,VAL1);
+
 // update graph set parent=-1, queue=NULL
 #define SET_ALL_NO_PARENT(QUERY) { \
 	sprintf(QUERY,"update %s set %s=%s, %s=%s",TABLE_NAME,PARENT_NAME,NO_PARENT,QUEUE_NAME,NULL_QUEUE); \

@@ -1,10 +1,20 @@
 #include <stdio.h>
 //#include <cstdlib> 
-#include <postgresql/libpq-fe.h>
 #include <string.h>
 #include <stdio.h>
 //#include <iostream.h>
 //using namespace std;
+
+// #define PARGRES_COMPILE
+#define DEBUG_MODE 1
+
+#ifdef PARGRES_COMPILE
+	#include <par_libpq-fe.h>
+#else
+	#include <postgresql/libpq-fe.h>
+#endif
+
+#include "graph500-bfs.h"
 
 void printGraph (PGconn *conn);
 
@@ -36,7 +46,13 @@ int main(int argc, char const *argv[]) {
 	res = PQexec(conn,"drop table if exists graph");
 	puts("Table Graph dropped");
 
-	res = PQexec(conn,"create table graph (a_id bigint, b_id bigint, parent bigint, queue bigint, primary key (a_id,b_id))");
+	res = PQexec(conn,"create table graph (id bigserial primary key,a_id bigint, b_id bigint, parent bigint, queue bigint)");// with (fragattr = id)");
+	
+	if (PQresultStatus(res) != PGRES_COMMAND_OK) { // Something's wrong...
+		puts("Queries failed\n");
+		PQclear(res);
+		exit(1);
+	}
 	puts("Table Graph created");
 
 	res = PQexec(conn,"begin transaction");
